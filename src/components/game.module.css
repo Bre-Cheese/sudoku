@@ -1,0 +1,56 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    width: min(90vw, 450px);
+    aspect-ratio: 1;
+    border: 3px solid #222;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #aaa;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cell:hover {
+    background-color: #f0f0f0;
+}
+
+.given {
+    font-weight: bold;
+    background-color: #eee;
+    cursor: default;
+}
+
+.rightBorder {
+    border-right: 3px solid #222;
+}
+
+.bottomBorder {
+    border-bottom: 3px solid #222;
+}
+
+.selected {
+  background: #cde4ff;
+}
+
+.grid:focus {
+  outline: none;
+}
+
+.revertButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.revertButton:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
