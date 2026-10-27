@@ -62,7 +62,7 @@ export default function Game() {
   }
 
   return (
-    <>
+    <div className={styles.game}>
       <div ref={gridRef} className={styles.grid} tabIndex={0} onKeyDown={handleKeyDown}>
       {board.map((row, r) =>
         row.map((value, c) => {
@@ -90,6 +90,6 @@ export default function Game() {
       >
         Revert
       </button>
-    </>
+    </div>
   );
 }
