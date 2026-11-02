@@ -14,6 +14,7 @@
 }
 
 .cell {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,8 +49,45 @@
   background: #cde4ff;
 }
 
+.notes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+  padding: 0.15rem;
+  color: #555;
+  font-size: 0.65rem;
+  font-weight: normal;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.notes span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .grid:focus {
   outline: none;
+}
+
+.notesButton {
+  align-self: flex-end;
+  margin-top: 0.75rem;
+  border: 1px solid #888;
+  border-radius: 0.25rem;
+  padding: 0.3rem 0.55rem;
+  background: #fff;
+  color: #222;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.notesButtonActive {
+  border-color: #176b2c;
+  background: #dff3e3;
 }
 
 .revertButton {
@@ -57,6 +95,13 @@
   padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;
+}
+
+.successMessage {
+  margin: 1rem 0 0;
+  color: #176b2c;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
 .revertButton:disabled {
