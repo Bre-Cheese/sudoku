@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  color : #000;
 }
 
 .grid {
@@ -24,13 +25,15 @@
 }
 
 .cell:hover {
-    background-color: #f0f0f0;
+    background-color: #d4d3d36e;
 }
 
 .given {
     font-weight: bold;
-    background-color: #eee;
+    background-color: #bfbfc1;
     cursor: default;
+    color: #000;
+  ;
 }
 
 .rightBorder {
@@ -38,7 +41,7 @@
 }
 
 .bottomBorder {
-    border-bottom: 3px solid #222;
+    border-bottom: 3px solid #0f0f0f;
 }
 
 .selected {
