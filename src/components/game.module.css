@@ -1,19 +1,24 @@
 .game {
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  color : #000;
+  color: #000;
 }
 
 .grid {
+
     display: grid;
+    position: absolute;
     grid-template-columns: repeat(9, 1fr);
     width: min(90vw, 450px);
     aspect-ratio: 1;
     border: 3px solid #222;
+    z-index: 2;
 }
 
 .cell {
+
     position: relative;
     display: flex;
     justify-content: center;
@@ -23,6 +28,7 @@
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.2s;
+    z-index: 1;
 }
 
 .cell:hover {
@@ -34,15 +40,19 @@
     background-color: #bfbfc1;
     cursor: default;
     color: #000;
-  ;
+    position: absolute;
 }
 
 .rightBorder {
-    border-right: 3px solid #222;
+  position: absolute;
+  border-right: 3px solid #222;
+  z-index: 2;
 }
 
 .bottomBorder {
     border-bottom: 3px solid #0f0f0f;
+    position: absolute;
+    z-index: 2;
 }
 
 .selected {
@@ -72,9 +82,15 @@
   outline: none;
 }
 
-.notesButton {
-  align-self: flex-end;
+.boardControls {
+  display: flex;
+  justify-content: space-between;
+  width: min(90vw, 450px);
   margin-top: 0.75rem;
+}
+
+.themeButton,
+.notesButton {
   border: 1px solid #888;
   border-radius: 0.25rem;
   padding: 0.3rem 0.55rem;
@@ -85,6 +101,7 @@
   cursor: pointer;
 }
 
+.themeButtonActive,
 .notesButtonActive {
   border-color: #176b2c;
   background: #dff3e3;
@@ -107,4 +124,60 @@
 .revertButton:disabled {
   cursor: default;
   opacity: 0.5;
+}
+
+.game[data-theme="dark"] {
+  color: #ededed;
+}
+
+.game[data-theme="dark"] .grid {
+  border-color: #d7d7d7;
+  background: #222;
+}
+
+.game[data-theme="dark"] .cell {
+  border-color: #777;
+  background: #222;
+  color: #ededed;
+}
+
+.game[data-theme="dark"] .cell:hover {
+  background-color: #3a3a3a;
+}
+
+.game[data-theme="dark"] .given {
+  background-color: #505050;
+  color: #fff;
+}
+
+.game[data-theme="dark"] .selected {
+  background: #315a7d;
+  color: #fff;
+}
+
+.game[data-theme="dark"] .rightBorder {
+  border-right-color: #d7d7d7;
+}
+
+.game[data-theme="dark"] .bottomBorder {
+  border-bottom-color: #d7d7d7;
+}
+
+.game[data-theme="dark"] .notes {
+  color: #bbb;
+}
+
+.game[data-theme="dark"] .themeButton,
+.game[data-theme="dark"] .notesButton,
+.game[data-theme="dark"] .revertButton {
+  border-color: #777;
+  background: #222;
+  color: #ededed;
+}
+
+.game[data-theme="dark"] .themeButtonActive,
+.game[data-theme="dark"] .notesButtonActive {
+  border-color: #67c47a;
+  background: #27452d;
+  color: #fff;
 }

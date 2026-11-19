@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {Board, copyBoard} from "@/logic/board";
 import {solve} from "@/logic/solver";
 import styles from "./game.module.css";
@@ -28,10 +28,23 @@ export default function Game() {
   const [selectedCell, setSelectedCell] = useState<[number, number] | null>(null);
   const [history, setHistory] = useState<Board[]>([]);
   const [notesEnabled, setNotesEnabled] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const savedTheme = window.localStorage.getItem("theme");
+    return savedTheme
+      ? savedTheme === "dark"
+      : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
   const gridRef = useRef<HTMLDivElement>(null);
   const solved = board.every((row, r) =>
     row.every((value, c) => value === SOLUTION[r][c])
   );
+
+  useEffect(() => {
+    const theme = darkMode ? "dark" : "light";
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("theme", theme);
+  }, [darkMode]);
 
   function setValue(r: number, c: number, value: number) {
     if (board[r][c] === value) return;
@@ -110,7 +123,7 @@ export default function Game() {
   }
 
   return (
-    <div className={styles.game}>
+    <div className={styles.game} data-theme={darkMode ? "dark" : "light"}>
       <div ref={gridRef} className={styles.grid} tabIndex={0} onKeyDown={handleKeyDown}>
       {board.map((row, r) =>
         row.map((value, c) => {
@@ -139,16 +152,28 @@ export default function Game() {
         })
       )}
       </div>
-      <button
-        type="button"
-        className={`${styles.notesButton} ${notesEnabled ? styles.notesButtonActive : ""}`}
-        onClick={() => setNotesEnabled((enabled) => !enabled)}
-        aria-pressed={notesEnabled}
-        aria-label={notesEnabled ? "Disable notes mode" : "Enable notes mode"}
-        title={notesEnabled ? "Disable notes mode" : "Enable notes mode"}
-      >
-        <span aria-hidden="true">✎</span>
-      </button>
+      <div className={styles.boardControls}>
+        <button
+          type="button"
+          className={`${styles.themeButton} ${darkMode ? styles.themeButtonActive : ""}`}
+          onClick={() => setDarkMode((enabled) => !enabled)}
+          aria-pressed={darkMode}
+          aria-label={darkMode ? "Disable dark mode" : "Enable dark mode"}
+          title={darkMode ? "Disable dark mode" : "Enable dark mode"}
+        >
+          <span aria-hidden="true">{darkMode ? "☀" : "☾"}</span>
+        </button>
+        <button
+          type="button"
+          className={`${styles.notesButton} ${notesEnabled ? styles.notesButtonActive : ""}`}
+          onClick={() => setNotesEnabled((enabled) => !enabled)}
+          aria-pressed={notesEnabled}
+          aria-label={notesEnabled ? "Disable notes mode" : "Enable notes mode"}
+          title={notesEnabled ? "Disable notes mode" : "Enable notes mode"}
+        >
+          <span aria-hidden="true">✎</span>
+        </button>
+      </div>
       {solved && (
         <p className={styles.successMessage} role="status">
           Congratulations! You solved the puzzle!

@@ -14,11 +14,7 @@ function findEmptyCell(board: Board): [number, number] | null {
 
 
 export function solve(board : Board): boolean {
-  // TODO: 1. find an empty cell (if none, return true)
-  //       2. loop num from 1 to 9
-  //       3. if isValid: place it, recurse, and if that returns true, return true
-  //       4. otherwise undo (set back to 0)
-  //       5. after the loop, return false
+    
     const emptyCell = findEmptyCell(board);
     if (!emptyCell) {
         return true;

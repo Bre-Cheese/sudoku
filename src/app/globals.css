@@ -3,9 +3,19 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) { 
+:root[data-theme="dark"] {
+  --background: #1A1A1A;
+  --foreground: #ededed;
+}
+
+:root[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #1A1A1A;
     --foreground: #ededed;
   }
 }
@@ -18,6 +28,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
